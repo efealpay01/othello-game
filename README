@@ -1,0 +1,55 @@
+README Othello
+
+Overview: In this program, I have coded game Othello with the option to play Human vs. Human, Human vs. Computer,
+Computer vs. Computer game modes. Additionally I've used a recursive algorithm called minimax to assign intelligence
+levels to my computers. The user is allowed to pick between 3 different intelligence levels where the computer player
+progressively gets better. My top level logic class is the setupGame class, contained in the app class. I also have
+a controller class that handles all the buttons and labels for the game. In addition to the game class this project
+heavily relies on the board class for most of its methods and functionality. The board class is contained within the
+game class and handles almost everything that goes on within the board. Another big part of the project is the PLayer
+interface which is implemented by both the HumanPlayer class and the ComputerPlayer class which handle move making.
+The game logic outside these classes rely on the Referee class which handles turn taking, score keeping and the time-
+line used by the players (mostly the computer player). The last core class in this project is the move class which
+is a very simple class consisting of only getter and setter methods and takes in a row,column and value. This class
+is used by the computer player to decide and make a move.
+
+
+Design: For the design of this project I mainly got help from the containment and interface diagram provided by
+the TAs. Some of the interesting features that I implemented within my code were the polymorphism for the
+two player types. This was done because while the two players needed to makeMove() in completely different ways
+(human player with mouse clicks, computer player with minimax) they had to be the same type to the referee. If this
+wasn't the case the code for the referee would've been infinitely more complicated. For the board I used a 2D array of
+smart squares which were able to "hold" pieces. These were called OthelloSquares within my code. I handled turn
+taking with a timeline that continuously paused and played to display a delay to the user and handle the logic behind
+a turn change. One of the biggest and most complicated parts of this code was the design for the AI. As stated above
+I used the minimax algorithm to achieve this.
+
+Known bugs: Currently while the 1st level of intelligence in my code works as intended(minimum functionality) but
+there are some issues when it comes to higher levels of computer play. In the current state of the code the winners
+of the matches between computer games are as follows:
+C3 beats C1 no matter the color
+C3 beats C2 when C3 is White
+C2 beats C3 when C2 is White
+C2 beats C1 when C2 is black
+C1 beats C2 when C1 is black
+
+If I change the -1 in front of the recursive call in getBestMove(minimax) to a positive 1 the computer games
+function as follows:
+C3 beats C1 no matter the color
+C3 beats C2 no matter the color
+C2 beats C1 when C2 is black
+C1 beats C2 when C1 is black
+
+In the code I have left the coefficient as -1 as that makes more sense logically even though it seems to hinder the
+performance more.
+
+I have had issues similar to this for the past 3 days(the 3 days before the deadline) and have asked multiple TA's
+(both in debugging and conceptual hours) about my issue but couldn't get it fixed completely. I have
+made a private ed post about my intelligence levels as well but couldn't fix it entirely. One other thing
+I did to try and fix this issue was change the Player parameter in the getBestMove method to Color so that it
+wouldn't need to take in referee as a parameter as well(suggested by TA). This also backfired as my intelligence
+were worse off in terms of functionality after the change. Everything other than this about my code works as intended.
+
+Debugging collaborators: none (except debugging hours)
+
+Hours: 70-80
